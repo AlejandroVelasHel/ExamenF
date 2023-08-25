@@ -1,28 +1,33 @@
 import 'package:flutter/material.dart';
 
 class InputsComponent extends StatelessWidget {
+  final String label;
+  final TextEditingController controller;
+  final bool obscureText;
+  final String? Function(String?)? validator;
+  final TextInputType? keyboardType;
+
+  const InputsComponent({
+    required this.label,
+    required this.controller,
+    this.obscureText = false,
+    this.validator,
+    this.keyboardType,
+    Key? key,
+  }) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
-        TextField(
+        TextFormField(
           decoration: InputDecoration(
-            labelText: 'Nombre',
+            labelText: label,
           ),
-        ),
-        SizedBox(height: 10),
-        TextField(
-          decoration: InputDecoration(
-            labelText: 'Edad',
-          ),
-          keyboardType: TextInputType.number,
-        ),
-        SizedBox(height: 10),
-        ElevatedButton(
-          onPressed: () {
-            // Lógica para procesar los datos ingresados en los campos
-          },
-          child: Text('Guardar'),
+          controller: controller,
+          obscureText: obscureText,
+          validator: validator,
+          keyboardType: keyboardType,
         ),
       ],
     );
